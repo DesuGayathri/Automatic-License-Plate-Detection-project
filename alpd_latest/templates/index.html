@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Automatic License Plate Detection</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2d3e50;
+      color: white;
+      padding: 20px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    main {
+      padding: 30px 20px;
+    }
+
+    img {
+      width: 95%;
+      max-width: 800px;
+      border: 5px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: white;
+    }
+
+    .link-button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 10px 20px;
+      background-color: #2d89ef;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .link-button:hover {
+      background-color: #1b5fcc;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 22px;
+      }
+
+      .link-button {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Automatic License Plate Detection</h1>
+  </header>
+
+  <main>
+    <img src="{{ url_for('video_feed') }}" alt="Live Video Feed">
+    <br>
+    <a href="{{ url_for('details') }}" class="link-button">View Detection Logs</a>
+  </main>
+
+  <footer>
+    &copy; 2025 ALPD System | Built with YOLOv8 + Flask
+  </footer>
+</body>
+</html>
+
