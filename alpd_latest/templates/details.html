@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vehicle Detection Log</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .search-box {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 95%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2d89ef;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 10px 20px;
+      background-color: #2d3e50;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      background-color: #1b1e2f;
+    }
+
+    @media (max-width: 600px) {
+      input[type="text"] {
+        width: 90%;
+      }
+
+      th, td {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Vehicle Entry and Exit Log</h2>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search by plate number...">
+  </div>
+
+  <table id="logTable">
+    <thead>
+      <tr>
+        <th>Plate Number</th>
+        <th>In Time</th>
+        <th>Out Time</th>
+        <th>Duration (Minutes)</th>
+        <th>Duration (Hours)</th>
+        <th>Duration (Days)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in logs %}
+      <tr>
+        <td>{{ log.plate_number }}</td>
+        <td>{{ log.in_time }}</td>
+        <td>{{ log.out_time or '---' }}</td>
+        <td>{{ log.duration_minutes }}</td>
+        <td>{{ log.duration_hours }}</td>
+        <td>{{ log.duration_days }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="/" class="back-link">Back to Live View</a>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("keyup", function () {
+      const filter = searchInput.value.toUpperCase();
+      const rows = document.querySelectorAll("#logTable tbody tr");
+
+      rows.forEach(row => {
+        const plate = row.cells[0].textContent.toUpperCase();
+        row.style.display = plate.includes(filter) ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
